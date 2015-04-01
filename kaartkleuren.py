@@ -7,7 +7,7 @@ def print_pennsylvania_list(filename):
     
     '''
         Prints the pennsylvania counties read from a CSV file, containing 
-        county in column 1 and number of ajoining counties 
+        county in column 1 and number of adjoining counties 
         
         @param filename: the filename to read the data from.
     '''
@@ -25,7 +25,7 @@ def pennsylvania_dict( filename ):
     	county in column 1 and number of ajoining counties
 
     	@param filename: the filename to read the data from
-    	@return dictionary containing county -> number of ajoining counties
+    	@return dictionary containing county -> number of adjoining counties
     '''
     reader = csv.reader(open(filename))
     reader.next()
