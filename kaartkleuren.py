@@ -1,7 +1,4 @@
-# Kleurenblind
-
 import csv
-
 
 def print_pennsylvania_list(filename):
     
@@ -11,12 +8,10 @@ def print_pennsylvania_list(filename):
         
         @param filename: the filename to read the data from.
     '''
+    
     reader = csv.reader(open(filename))
-    reader.next()
     for row in reader:
-        print str(row[1]) + ": " + str(int(float(row[3])*1000))
-        
-print_pennsylvania_list("Pennsylvania_counties_list.csv")
+        print row 
 
 def pennsylvania_dict( filename ):
     
@@ -27,9 +22,11 @@ def pennsylvania_dict( filename ):
     	@param filename: the filename to read the data from
     	@return dictionary containing county -> number of adjoining counties
     '''
+    
     reader = csv.reader(open(filename))
-    reader.next()
     pennsylvania_dict = dict()
     for row in reader:
-        pennsylvania_dict[int(row[2])] = int(float(row[3])*1000)
+        pennsylvania_dict[int(row[0])] = int(float(row[3])*1000)
     return pennsylvania_dict
+    
+print_pennsylvania_list("Pennsylvania_counties_list.csv")
