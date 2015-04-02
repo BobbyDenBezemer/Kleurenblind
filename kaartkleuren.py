@@ -1,32 +1,25 @@
 import csv
-
-def print_pennsylvania_list(filename):
     
-    '''
-        Prints the pennsylvania counties read from a CSV file, containing 
-        county in column 1 and number of adjoining counties 
-        
-        @param filename: the filename to read the data from.
-    '''
+def penssylvania_dict_reader(filename, seperator):
+    """
+    import the data as a dictionary and the values as lists of ints
+    """
+    data = {}
+    with open(filename, 'rb') as csvfile:
+        reader = csv.reader(csvfile, delimiter= seperator)
+        for row in reader:
+            print row
+            data[str(row[0])] = [e for e in row[1:] if e]
+            
+    # now convert items to ints
+    storage = []
+    for key, item in data.iteritems():
+        for e in item:
+            storage.append(int(e))
+        data[key] = storage
+        storage = []
+    return data
     
-    reader = csv.reader(open(filename))
-    for row in reader:
-        print row 
-
-def pennsylvania_dict( filename ):
     
-    '''
-    	Reads the population from a CSV file, containing 
-    	county in column 1 and number of ajoining counties
-
-    	@param filename: the filename to read the data from
-    	@return dictionary containing county -> number of adjoining counties
-    '''
+data = penssylvania_dict_reader("Pennsylvania_counties_list.csv", ",")
     
-    reader = csv.reader(open(filename))
-    pennsylvania_dict = dict()
-    for row in reader:
-        pennsylvania_dict[int(row[0])] = int(float(row[3])*1000)
-    return pennsylvania_dict
-    
-print_pennsylvania_list("Pennsylvania_counties_list.csv")
