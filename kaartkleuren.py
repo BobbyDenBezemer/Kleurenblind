@@ -56,13 +56,21 @@ for key in edges_table:
             colors[key] += 1
 
 # check for collissions
-
+def collission_test():
+    for key in edges_table:
+        aanliggend = edges_table.get(key)
+        for countie in aanliggend:
+            if colors[key] == colors[countie]:
+                return False
+    return True
+            
 " to do "
 
-# prints each countie and corresponding 'color'
-            
-#print colors
+print colors
+print collission_test()
 
+
+# prints each countie and corresponding 'color'
 #i = 1
 #while i <= len(edges_table):
     #print lookup_table[i], colors[i]
