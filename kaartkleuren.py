@@ -32,15 +32,38 @@ def penssylvania_dict_reader(filename, seperator):
     
 edges_table, lookup_table = penssylvania_dict_reader("Pennsylvania_counties_list.csv", ",")
 
-# make hte matrix
-matrix = np.zeros((66,66))
+print edges_table
 
-# fill the matrix by means of a for loop
-for key in data.keys():
-    for value in data.values():
-        if len(value) < 1:
-            print key, value
-        else:
-            for item in value:
-                print key, item
-    
+# list of all colors, index of list corresponds with countie number - 1
+colors = []
+colors.append('start colors list')
+i = 1
+while i <= len(edges_table):
+    colors.append(0)
+    i += 1
+
+print colors
+
+# change color of each countie to satisfy constraints
+for key in edges_table:
+    aanliggend = edges_table.get(key)
+
+    for countie in aanliggend:
+        if colors[key] == colors[countie]:
+            colors[key] += 1
+    for countie in aanliggend:
+        if colors[key] == colors[countie]:
+            colors[key] += 1
+
+# check for collissions
+
+" to do "
+
+# prints each countie and corresponding 'color'
+            
+#print colors
+
+#i = 1
+#while i <= len(edges_table):
+    #print lookup_table[i], colors[i]
+    #i += 1
