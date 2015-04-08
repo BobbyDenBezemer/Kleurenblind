@@ -32,28 +32,26 @@ def penssylvania_dict_reader(filename, seperator):
     
 edges_table, lookup_table = penssylvania_dict_reader("Pennsylvania_counties_list.csv", ",")
 
-print edges_table
 
 # list of all colors, index of list corresponds with countie number - 1
 colors = []
 colors.append('start colors list')
 i = 1
 while i <= len(edges_table):
-    colors.append(0)
+    colors.append(1)
     i += 1
-
-print colors
 
 # change color of each countie to satisfy constraints
 for key in edges_table:
     aanliggend = edges_table.get(key)
 
-    for countie in aanliggend:
-        if colors[key] == colors[countie]:
-            colors[key] += 1
-    for countie in aanliggend:
-        if colors[key] == colors[countie]:
-            colors[key] += 1
+    i = 0
+    while i < 4:
+        for countie in aanliggend:
+            if colors[key] == colors[countie]:
+                colors[key] += 1
+        i += 1
+
 
 # check for collissions
 def collission_test():
@@ -61,17 +59,16 @@ def collission_test():
         aanliggend = edges_table.get(key)
         for countie in aanliggend:
             if colors[key] == colors[countie]:
+                print lookup_table[key], lookup_table[countie]
                 return False
     return True
-            
-" to do "
 
-print colors
 print collission_test()
 
 
 # prints each countie and corresponding 'color'
-#i = 1
-#while i <= len(edges_table):
-    #print lookup_table[i], colors[i]
-    #i += 1
+def print_counties_colors():
+    i = 1
+    while i <= len(edges_table):
+        print lookup_table[i], colors[i]
+        i += 1
