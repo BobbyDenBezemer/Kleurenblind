@@ -30,7 +30,7 @@ def penssylvania_dict_reader(filename, seperator):
 
     
     
-edges_table, lookup_table = penssylvania_dict_reader("Pennsylvania_counties_list.csv", ",")
+edges_table, lookup_table = penssylvania_dict_reader("Thomasland.csv", ",")
 
 
 # list of all colors, index of list corresponds with countie number - 1
@@ -63,7 +63,9 @@ def collission_test():
                 return False
     return True
 
+print colors
 print collission_test()
+
 
 
 # prints each countie and corresponding 'color'
@@ -72,3 +74,5 @@ def print_counties_colors():
     while i <= len(edges_table):
         print lookup_table[i], colors[i]
         i += 1
+
+#print_counties_colors()
