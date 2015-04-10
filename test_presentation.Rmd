@@ -1,0 +1,42 @@
+---
+title: "Making a html presentation with python"
+author: "Bobby den Bezemer"
+output: ioslides_presentation
+---
+
+## Intro
+
+We can easily make html presentations using R markdown. It's very easy to learn. The great asset is that we can run python syntax in code chunks
+
+```{r,echo = FALSE}
+require(ggplot2)
+
+```
+
+
+## Slide with Bullets
+
+We can also easily make lists 
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+Here is a footnote reference,[^1] and another.[^longnote]
+
+One explanation for this unexpected finding is that ideal cut diamonds also tend to be **smaller**.  
+The mean is \(E(carat | cut = Ideal) = `r mean(subset(diamonds, cut == "Ideal")$carat)`\), and size is related to price.
+
+## Slide with R Code and Output
+
+```{r,engine='python', echo=TRUE,eval=TRUE}
+test = []
+for i in range(1,11):
+  test.append(i)
+print test
+
+```
+
+[^1]: Here is the footnote.
+
+[^longnote]: Here's one with multiple blocks.
