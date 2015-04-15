@@ -37,9 +37,6 @@ def penssylvania_dict_reader(filename, seperator):
 edges_table, lookup_table = penssylvania_dict_reader("Pennsylvania_counties_list.csv", ",")
 
 
-colors = {}
-is_colored = []
-
 # returns the most connected countie based on a dictionary
 def most_connected(edges_table):
     longest = 0
@@ -63,23 +60,56 @@ def get_shell(edges_table, start):
         length = []
     return keys
     
-test = get_shell(edges_table, 33)
-
-def color_counties(county):
-    if county not in is_colored:
-        colors[county] = 0 # hier moet beter algoritme komen dat bepaalt welke kleur
+def color_counties(county, is_colored, colors):
+    if len(is_colored) == 0:
+        colors[county] = 0
         is_colored.append(county)
+    else:
+        if county not in is_colored:
+            is_colored.append(county)  
+            
+    return colors, is_colored
     
+def main(edges_table):
+    number_counties = len(edges_table)
+    colors = {}
+    is_colored = []
     
-def main():
+    # get the starting point and the shell
     start = most_connected(edges_table)
     shell = get_shell(edges_table, start)
+    #print start, shell
     
+    # color the starting point
+    colors, is_colored = color_counties(start, is_colored, colors)
+    print colors, is_colored
+    
+    # now move on to all the counties are colored
+    while len(is_colored) < number_counties:
+        for key in shell.keys():
+            start = 
+            color_counties(key, is_colored, colors)
+        print is_colored
+    
+main()
+
+a = [1,2,3,4,5]
+b = [[1,[2,3,4]],[2,[4,5,6]], [3,[8,7,9]]]
+
+{1 : [2,3,4],
+ 2: [4,5,6],
+ 3: [7,8, 9]}
+ 
+ 
+a = {25 : [17, 22, 26, 32],
+     25 :[17, 22]
+}
+ 
+  
     
         
     # now get the shell country where you will start coloring
-    color_start = max(keys, key=lambda x:len(keys[x]))
-    return color_start
+    
 
 i = 1
 while i <= len(edges_table):
