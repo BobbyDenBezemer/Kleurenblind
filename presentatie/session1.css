@@ -1,0 +1,48 @@
+ul.numeric-decimals { counter-reset:section; list-style-type:none; }
+ul.numeric-decimals li { list-style-type:none; }
+ul.numeric-decimals li ul { counter-reset:subsection; }
+ul.numeric-decimals li:before{
+    counter-increment:section;
+    content:counter(section) ". ";/*content:"Section " counter(section) ". ";*/
+}
+ul.numeric-decimals li ul li:before {
+    counter-increment:subsection;
+    content:counter(section) "." counter(subsection) " ";
+}
+
+.separator {
+	padding-left: 20px;
+}
+
+.make_small {
+	font-size: 12px;
+	text-align: center;
+}
+
+.make_small2 {
+	font-size: 12px;
+}
+
+table {
+   border: 2px solid #ccc;
+ }
+
+th {
+    color: #ffffff;
+    width: 100px;
+}
+
+tr {
+	border-bottom: 1px solid #ccc;
+}
+
+td {
+  background-color: #dcdcdc;
+  width: 100px;
+}
+
+.bottom {
+	position: absolute;
+	bottom: 0;
+	left:40%;
+}
