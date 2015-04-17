@@ -13,7 +13,22 @@ output:
 
 Het doel van deze presentatie is het weergeven van onze vordering betreffende het inkleuren van de kaarten
 
-## Beschrijving van het algoritme
+## Beschrijving eerste algoritme
+
+1. We initialiseren alle kleuren op 0.
+2. We updaten de kleuren van een parent zolang een van de children dezelfde kleur heeft.
+3. Repeat dit proces voor alle counties.
+
+## Resultaat
+
+Het resultaat is het volgende:
+
+<figure>
+  <img src="figure_4.png" width = 1000 height= 500/>  
+  <figcaption class="make_small2">Fig.1 - Onze kaart </figcaption>
+</figure>
+
+## Beschrijving tweede algoritme
 
 Ons algoritme beoogt het volgende:
 
@@ -31,21 +46,6 @@ Het resultaat is dat het proces tot nu toe werkt voor de eerste shell. Bij de tw
 
 <figure>
   <img src="eerste_fig.png" width = 1000 height= 400/>  
-  <figcaption class="make_small2">Fig.1 - Onze kaart </figcaption>
-</figure>
-
-## Tweede algoritme
-
-1. We initialiseren alle kleuren op 0.
-2. We updaten de kleuren van een parent zolang een van de children dezelfde kleur heeft.
-3. Repeat dit proces voor alle counties.
-
-## Resultaat
-
-Het resultaat is het volgende:
-
-<figure>
-  <img src="figure_4.png" width = 1000 height= 500/>  
   <figcaption class="make_small2">Fig.1 - Onze kaart </figcaption>
 </figure>
 
