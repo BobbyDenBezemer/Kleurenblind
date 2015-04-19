@@ -34,6 +34,8 @@ def set_colors():
         # optimalisatie (AANNAME!!!)
         for child in edges_table.get(parent):
             colors[child] = upgrade_parent(child)
+        if colors[parent] == 0:
+            colors[parent] += 1
 
 
 # recursively upgrade parent color
@@ -65,7 +67,7 @@ for parent in edges_table:
 set_colors()
 
 # print feedback
-#print print_counties_colors()
+print print_counties_colors()
 
 # dictionary of colors for map-coloring
 dictionary_colors = {}
