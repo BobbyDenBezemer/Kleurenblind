@@ -125,7 +125,7 @@ def color_countie(countie):
 
 if __name__ == '__main__':
 
-    edges_table, lookup_table = penssylvania_dict_reader("Pennsylvania_counties_list.csv", ",")
+    edges_table, lookup_table = penssylvania_dict_reader("Spanje_provincies_list.csv", ",")
     
     colors = []
     coloured = []
@@ -200,3 +200,6 @@ if __name__ == '__main__':
     dictionary_colors = {}
     for i in range(1, len(edges_table) + 1):
         dictionary_colors[lookup_table[i]] = colors[i]
+        
+    print colors
+    print collission_test()
