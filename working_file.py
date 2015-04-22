@@ -74,12 +74,16 @@ def color_max_edging():
 # if there are no colissions, otherwise returns the first occurring collission
 # and false. 
 def collission_test():
+    x = 0
+    y = 0
     for key in edges_table:
         aanliggend = edges_table.get(key)
         for countie in aanliggend:
             if colors[key] == colors[countie]:
-                print lookup_table[key], lookup_table[countie]
-                return False
+                x = key
+                y = countie
+                print lookup_table[key] + ' collides with ' + lookup_table[countie]
+                return False, x, y
     return True
 
 
@@ -121,11 +125,18 @@ def color_countie(countie):
                 colors[countie] += 1
     coloured[countie] = True
 
-
+def find_countie_highest_color(colors):
+    maximum = 0
+    countie = 0
+    for i, item in enumerate(colors[1:]):
+        if item > maximum: 
+            maximum = item
+            countie = i
+    return countie + 1
 
 if __name__ == '__main__':
 
-    edges_table, lookup_table = penssylvania_dict_reader("Spanje_provincies_list.csv", ",")
+    edges_table, lookup_table = penssylvania_dict_reader("Rathjastan_districts_list_comma.csv", ",")
     
     colors = []
     coloured = []
@@ -193,13 +204,44 @@ if __name__ == '__main__':
             color_countie(item)
             
             
+    #Collission test, try to force solution
+    highest_color_countie = find_countie_highest_color(colors) 
+    #while colors[highest_color_countie] > 4:
+        #colors[highest_color_countie] -= 1
+    
+    results = collission_test()
+    if results != True:
+        countie_1 = results[1]
+        countie_2 = results[2]
+    
+        colors[countie_1] = 0
+        colors[countie_2] = 0
+    
+        count = 0
+    
+        while collission_test() != True or colors[countie_1] != 0 or colors[countie_2] != 0:
+            recount = count % 2
+            if recount == 0:
+                if colors[countie_1] > 3:
+                    colors[countie_1] = 1
+                else:
+                    colors[countie_1] += 1
+                count += 1
+            if recount == 1:
+                if colors[countie_2] > 3:
+                    colors[countie_2] = 1
+                else:
+                    colors[countie_2] += 1
+                count += 1
+            if colors[countie_1] != 0 and colors[countie_2] != 0:
+                if collission_test() == True:
+                   break
+            #if count > 8:
+                #break
     
     
-    # ---- First shell completed ---- #
-
     dictionary_colors = {}
     for i in range(1, len(edges_table) + 1):
         dictionary_colors[lookup_table[i]] = colors[i]
-        
-    print colors
     print collission_test()
+    print colors
