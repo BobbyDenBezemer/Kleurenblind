@@ -3,8 +3,8 @@ import os
 import csv
 import collections
 import numpy as np
-import random
 import pandas as pd
+from making_map import *
 
 # Import function that makes and colors the actual map
 # import map_making
@@ -39,7 +39,7 @@ def penssylvania_dict_reader(filename, seperator):
 
 
 
-edges_table, lookup_table = penssylvania_dict_reader("Pennsylvania_counties_list_new.csv", ",")
+edges_table, lookup_table = penssylvania_dict_reader("rathjastan_districts_list_comma.csv", ",")
 
 def most_connected(edges_table):
     # returns the most connected countie based on a dictionary
@@ -138,7 +138,7 @@ def main(edges_table):
     # now continue until all counties are colored
     # TODO:  all (i != 0 for i in range(1,67)).
     #while len(is_colored) < number_counties:
-    while count < 5:
+    while count < 8:
         for parent in shell:
             colors[parent] += 1
             # keep checking for conflicts, if so upgrade
@@ -168,49 +168,68 @@ from matplotlib.collections import LineCollection
 from matplotlib.patches import Polygon
 from mpl_toolkits.basemap import Basemap
 import shapefile
-
+    
 # just some standard matplob lib syntax to add a figure and then make a subplot
 fig = plt.figure(figsize=(15.7,12.3))
 ax = plt.subplot(111)
-
+    
 # make the map projection. Choose mercator and define upper and lower boundaries
 # urcrnrlat = upper right corner lattitude, urcrnrlon = upper right corner longitude
 # llcrnlat = lower left corner lattitude, llcrnrlon = lower left corner longitude
-m = Basemap(projection='merc',
-            resolution='l',llcrnrlat=39,
-    urcrnrlat=43,
-    llcrnrlon=-82,
-    urcrnrlon=-74, area_thresh=10000)
+# For Pensylvania, use following values:
+# lat_down = 39, lon_down = -82, lat_up = 43, lon = -74 
     
-
-  
+# For Spain
+# lat_up = 4, lon_up = 44, lat_down = 9, lon_down = 36
+    
+# For Rajistan
+lat_up = 31
+lon_up = 79
+lat_down = 23
+lon_down = 69
+    
+# For India
+#lat_up = 30
+#lon_up = 92
+#lat_down = 8 
+#lon_down = 66
+m = Basemap(projection='merc',
+            resolution='l',llcrnrlat= lat_down,
+            llcrnrlon = lon_down, urcrnrlat = lat_up,
+            urcrnrlon = lon_up, area_thresh=10000)
+        
 m.drawcoastlines()  # draw the coastlines
-m.drawstates() # draw the states
-m.drawcountries() # draw countries
+#m.drawstates() # draw the states
+#m.drawcountries() # draw countries
 m.drawmapboundary(fill_color='white') # draw the boundary
-
+    
 # read in the shapefile and draw them
-m.readshapefile('./shapefile/PA_counties_clip', 'countries_sf', drawbounds=True)
-
+m.readshapefile('./shapefile/India/IND_adm2', 
+                'countries_sf', drawbounds=True)
+    
 print len(m.countries_sf) #number of shapes, so 69
-test = []
-#for i in range(len(m.countries_sf_info)):
-#    if m.countries_sf_info[i]['NAME'] not in test:
-#        test.append(m.countries_sf_info[i]['NAME'])
-print m.countries_sf_info[0]['NAME'] # this is how you get the state names
-
+for countie in m.countries_sf_info:
+    if countie['NAME_1'] == 'Rajasthan':
+        print countie
+ 
+#print m.countries_sf_info
 
 # look over the shapes and actual data
 for shape, countie in zip(m.countries_sf, m.countries_sf_info):
-    # now loop over all the keys and values in the dictionary
-    for lookup in dictionary_colors.items():
-        # compare the countie name of the data with the countie name in the lookup table
-        if lookup[0] == countie['NAME']:
-            # then choose a country from our list depending on the value of the key
-            color = colours[lookup[1]]          
-    poly = Polygon(shape, facecolor=color)
-    plt.gca().add_patch(poly)
-    
-plt.show()       
+    if countie['NAME_1'] == 'Rajasthan':
+# now loop over all the keys and values in the dictionary
+        for lookup in dictionary_colors.items():
+            print lookup[0], countie['NAME_2']
+            # compare the countie name of the data with the countie name in the lookup table
+            if lookup[0] == countie['NAME_2']:
+                # then choose a country from our list depending on the value of the key
+                color = colours[lookup[1]] 
+                break
+            else:
+                color = "gray"
+        poly = Polygon(shape, facecolor=color)
+        plt.gca().add_patch(poly)
+        
+plt.show() 
         
 
