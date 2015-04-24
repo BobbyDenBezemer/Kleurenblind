@@ -1,6 +1,4 @@
 import csv
-import collections
-import numpy as np
     
 def penssylvania_dict_reader(filename, seperator):
     """
@@ -103,6 +101,7 @@ def not_fully_coloured(boolean_list):
             return True
     return False
 
+# Find the countie with most edges in 'edges'-list
 def find_most_edges(edges):
     check = 0
     largest = 0
@@ -112,6 +111,7 @@ def find_most_edges(edges):
             largest = item
     return largest
 
+# Color specific countie, check 4 times if there are no collissions (4 colors to be used)
 def color_countie(countie):
     if coloured[countie] == True:
         return
@@ -125,6 +125,8 @@ def color_countie(countie):
                 colors[countie] += 1
     coloured[countie] = True
 
+# Part of optimilization, if there is a color = 5 in the result, try to eliminate this. 
+# Function returns countie with the 'highest' color 
 def find_countie_highest_color(colors):
     maximum = 0
     countie = 0
@@ -134,9 +136,43 @@ def find_countie_highest_color(colors):
             countie = i
     return countie + 1
 
+def optimilization_try():
+    #Collission test, try to force solution
+    highest_color_countie = find_countie_highest_color(colors) 
+    
+    results = collission_test()
+    if results != True:
+        countie_1 = results[1]
+        countie_2 = results[2]
+    
+        colors[countie_1] = 0
+        colors[countie_2] = 0
+    
+        count = 0
+    
+        while collission_test() != True or colors[countie_1] != 0 or colors[countie_2] != 0:
+            recount = count % 2
+            if recount == 0:
+                if colors[countie_1] > 3:
+                    colors[countie_1] = 1
+                else:
+                    colors[countie_1] += 1
+                count += 1
+            if recount == 1:
+                if colors[countie_2] > 3:
+                    colors[countie_2] = 1
+                else:
+                    colors[countie_2] += 1
+                count += 1
+            if colors[countie_1] != 0 and colors[countie_2] != 0:
+                if collission_test() == True:
+                   break
+    
+
+
 if __name__ == '__main__':
 
-    edges_table, lookup_table = penssylvania_dict_reader("Rathjastan_districts_list_comma.csv", ",")
+    edges_table, lookup_table = penssylvania_dict_reader("Thomasland.csv", ",")
     
     colors = []
     coloured = []
@@ -178,70 +214,27 @@ if __name__ == '__main__':
     for item in next_to:
         edges.append(edges_table.get(item))
     
-    third_shell = []    
-    for i in range(len(edges)):
-        for item in edges[i]:
-            color_countie(item)
-            third_shell.append(edges_table.get(item))
+    # Color shell for shell, in this case 5 times. Repeat until all counties are coloured = True
+    third_shell = [] 
+    while True:
+        for i in range(len(edges)):
+            for item in edges[i]:
+                color_countie(item)
+                third_shell.append(edges_table.get(item))
+        for i in range(len(third_shell)):
+            for item in third_shell[i]:
+               color_countie(item)
+               edges.append(edges_table.get(item))
+        if all(coloured):
+            break
+
+    highest_color_countie = find_countie_highest_color(colors)     
     
-    for i in range(len(third_shell)):
-        for item in third_shell[i]:
-            color_countie(item)
-            edges.append(edges_table.get(item))
-    
-    for i in range(len(edges)):
-        for item in edges[i]:
-            color_countie(item)
-            third_shell.append(edges_table.get(item)) 
-    
-    for i in range(len(third_shell)):
-        for item in third_shell[i]:
-            color_countie(item)
-            edges.append(edges_table.get(item))
-    
-    for i in range(len(edges)):
-        for item in edges[i]:
-            color_countie(item)
-            
-            
-    #Collission test, try to force solution
-    highest_color_countie = find_countie_highest_color(colors) 
-    #while colors[highest_color_countie] > 4:
-        #colors[highest_color_countie] -= 1
-    
-    results = collission_test()
-    if results != True:
-        countie_1 = results[1]
-        countie_2 = results[2]
-    
-        colors[countie_1] = 0
-        colors[countie_2] = 0
-    
-        count = 0
-    
-        while collission_test() != True or colors[countie_1] != 0 or colors[countie_2] != 0:
-            recount = count % 2
-            if recount == 0:
-                if colors[countie_1] > 3:
-                    colors[countie_1] = 1
-                else:
-                    colors[countie_1] += 1
-                count += 1
-            if recount == 1:
-                if colors[countie_2] > 3:
-                    colors[countie_2] = 1
-                else:
-                    colors[countie_2] += 1
-                count += 1
-            if colors[countie_1] != 0 and colors[countie_2] != 0:
-                if collission_test() == True:
-                   break
-            #if count > 8:
-                #break
-    
-    
-    dictionary_colors = {}
-    for i in range(1, len(edges_table) + 1):
-        dictionary_colors[lookup_table[i]] = colors[i]
-    print collission_test()
-    print colors
+    if colors[highest_color_countie] > 4:
+        optimilization_try()
+    else: 
+        dictionary_colors = {}
+        for i in range(1, len(edges_table) + 1):
+            dictionary_colors[lookup_table[i]] = colors[i]
+        print collission_test()
+        print colors
