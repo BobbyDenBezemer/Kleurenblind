@@ -1,48 +1,48 @@
-Ôªø"PID","ID_0","ISO","NAME_0","ID_1","NAME_1","ID_2","NAME_2","NL_NAME_2","VARNAME_2","TYPE_2","ENGTYPE_2"
-33425,213,"ESP","Spain",1,"Andaluc√≠a",1,"Almer√≠a","","","Provincia","Province"
-33426,213,"ESP","Spain",1,"Andaluc√≠a",2,"C√°diz","","","Provincia","Province"
-33427,213,"ESP","Spain",1,"Andaluc√≠a",3,"C√≥rdoba","","","Provincia","Province"
-33428,213,"ESP","Spain",1,"Andaluc√≠a",4,"Granada","","","Provincia","Province"
-33429,213,"ESP","Spain",1,"Andaluc√≠a",5,"Huelva","","","Provincia","Province"
-33430,213,"ESP","Spain",1,"Andaluc√≠a",6,"Ja√©n","","","Provincia","Province"
-33431,213,"ESP","Spain",1,"Andaluc√≠a",7,"M√°laga","","","Provincia","Province"
-33432,213,"ESP","Spain",1,"Andaluc√≠a",8,"Sevilla","","","Provincia","Province"
-33433,213,"ESP","Spain",2,"Arag√≥n",9,"Huesca","","","Provincia","Province"
-33434,213,"ESP","Spain",2,"Arag√≥n",10,"Teruel","","","Provincia","Province"
-33435,213,"ESP","Spain",2,"Arag√≥n",11,"Zaragoza","","","Provincia","Province"
-33436,213,"ESP","Spain",3,"Cantabria",12,"Cantabria","","","Provincia","Province"
-33437,213,"ESP","Spain",4,"Castilla-La Mancha",13,"Albacete","","","Provincia","Province"
-33438,213,"ESP","Spain",4,"Castilla-La Mancha",14,"Ciudad Real","","","Provincia","Province"
-33439,213,"ESP","Spain",4,"Castilla-La Mancha",15,"Cuenca","","","Provincia","Province"
-33440,213,"ESP","Spain",4,"Castilla-La Mancha",16,"Guadalajara","","","Provincia","Province"
-33441,213,"ESP","Spain",4,"Castilla-La Mancha",17,"Toledo","","","Provincia","Province"
-33442,213,"ESP","Spain",5,"Castilla y Le√≥n",18,"√Åvila","","","Provincia","Province"
-33443,213,"ESP","Spain",5,"Castilla y Le√≥n",19,"Burgos","","","Provincia","Province"
-33444,213,"ESP","Spain",5,"Castilla y Le√≥n",20,"Le√≥n","","","Provincia","Province"
-33445,213,"ESP","Spain",5,"Castilla y Le√≥n",21,"Palencia","","","Provincia","Province"
-33446,213,"ESP","Spain",5,"Castilla y Le√≥n",22,"Salamanca","","","Provincia","Province"
-33447,213,"ESP","Spain",5,"Castilla y Le√≥n",23,"Segovia","","","Provincia","Province"
-33448,213,"ESP","Spain",5,"Castilla y Le√≥n",24,"Soria","","","Provincia","Province"
-33449,213,"ESP","Spain",5,"Castilla y Le√≥n",25,"Valladolid","","","Provincia","Province"
-33450,213,"ESP","Spain",5,"Castilla y Le√≥n",26,"Zamora","","","Provincia","Province"
-33451,213,"ESP","Spain",6,"Catalu√±a",27,"Barcelona","","","Provincia","Province"
-33452,213,"ESP","Spain",6,"Catalu√±a",28,"Girona","","","Provincia","Province"
-33453,213,"ESP","Spain",6,"Catalu√±a",29,"Lleida","","","Provincia","Province"
-33454,213,"ESP","Spain",6,"Catalu√±a",30,"Tarragona","","","Provincia","Province"
-33457,213,"ESP","Spain",8,"Comunidad de Madrid",31,"Madrid","","","Provincia","Province"
-33458,213,"ESP","Spain",9,"Comunidad Foral de Navarra",32,"Navarra","","","Provincia","Province"
-33459,213,"ESP","Spain",10,"Comunidad Valenciana",33,"Alicante","","Alacant","Provincia","Province"
-33460,213,"ESP","Spain",10,"Comunidad Valenciana",34,"Castell√≥n","","Castell√≥","Provincia","Province"
-33461,213,"ESP","Spain",10,"Comunidad Valenciana",35,"Valencia","","Val√®ncia","Provincia","Province"
-33462,213,"ESP","Spain",11,"Extremadura",36,"Badajoz","","","Provincia","Province"
-33463,213,"ESP","Spain",11,"Extremadura",37,"C√°ceres","","","Provincia","Province"
-33464,213,"ESP","Spain",12,"Galicia",38,"A Coru√±a","","La Coru√±a","Provincia","Province"
-33465,213,"ESP","Spain",12,"Galicia",39,"Lugo","","","Provincia","Province"
-33466,213,"ESP","Spain",12,"Galicia",40,"Ourense","","","Provincia","Province"
-33467,213,"ESP","Spain",12,"Galicia",41,"Pontevedra","","","Provincia","Province"
-33470,213,"ESP","Spain",15,"La Rioja",42,"La Rioja","","","Provincia","Province"
-33471,213,"ESP","Spain",16,"Pa√≠s Vasco",43,"√Ålava","","Araba","Provincia","Province"
-33472,213,"ESP","Spain",16,"Pa√≠s Vasco",44,"Guip√∫zcoa","","","Provincia","Province"
-33473,213,"ESP","Spain",16,"Pa√≠s Vasco",45,"Vizcaya","","","Provincia","Province"
-33474,213,"ESP","Spain",17,"Principado de Asturias",46,"Asturias","","","Provincia","Province"
-33475,213,"ESP","Spain",18,"Regi√≥n de Murcia",47,"Murcia","","","Provincia","Province"
+PID	ID_0	ISO	NAME_0	ID_1	NAME_1	ID_2	NAME_2	NL_NAME_2	VARNAME_2	TYPE_2	ENGTYPE_2
+33425	213	ESP	Spain	1	AndalucÌa	1	AlmerÌa			Provincia	Province
+33426	213	ESP	Spain	1	AndalucÌa	2	C·diz			Provincia	Province
+33427	213	ESP	Spain	1	AndalucÌa	3	CÛrdoba			Provincia	Province
+33428	213	ESP	Spain	1	AndalucÌa	4	Granada			Provincia	Province
+33429	213	ESP	Spain	1	AndalucÌa	5	Huelva			Provincia	Province
+33430	213	ESP	Spain	1	AndalucÌa	6	JaÈn			Provincia	Province
+33431	213	ESP	Spain	1	AndalucÌa	7	M·laga			Provincia	Province
+33432	213	ESP	Spain	1	AndalucÌa	8	Sevilla			Provincia	Province
+33433	213	ESP	Spain	2	AragÛn	9	Huesca			Provincia	Province
+33434	213	ESP	Spain	2	AragÛn	10	Teruel			Provincia	Province
+33435	213	ESP	Spain	2	AragÛn	11	Zaragoza			Provincia	Province
+33436	213	ESP	Spain	3	Cantabria	12	Cantabria			Provincia	Province
+33437	213	ESP	Spain	4	Castilla-La Mancha	13	Albacete			Provincia	Province
+33438	213	ESP	Spain	4	Castilla-La Mancha	14	Ciudad Real			Provincia	Province
+33439	213	ESP	Spain	4	Castilla-La Mancha	15	Cuenca			Provincia	Province
+33440	213	ESP	Spain	4	Castilla-La Mancha	16	Guadalajara			Provincia	Province
+33441	213	ESP	Spain	4	Castilla-La Mancha	17	Toledo			Provincia	Province
+33442	213	ESP	Spain	5	Castilla y LeÛn	18	¡vila			Provincia	Province
+33443	213	ESP	Spain	5	Castilla y LeÛn	19	Burgos			Provincia	Province
+33444	213	ESP	Spain	5	Castilla y LeÛn	20	LeÛn			Provincia	Province
+33445	213	ESP	Spain	5	Castilla y LeÛn	21	Palencia			Provincia	Province
+33446	213	ESP	Spain	5	Castilla y LeÛn	22	Salamanca			Provincia	Province
+33447	213	ESP	Spain	5	Castilla y LeÛn	23	Segovia			Provincia	Province
+33448	213	ESP	Spain	5	Castilla y LeÛn	24	Soria			Provincia	Province
+33449	213	ESP	Spain	5	Castilla y LeÛn	25	Valladolid			Provincia	Province
+33450	213	ESP	Spain	5	Castilla y LeÛn	26	Zamora			Provincia	Province
+33451	213	ESP	Spain	6	CataluÒa	27	Barcelona			Provincia	Province
+33452	213	ESP	Spain	6	CataluÒa	28	Girona			Provincia	Province
+33453	213	ESP	Spain	6	CataluÒa	29	Lleida			Provincia	Province
+33454	213	ESP	Spain	6	CataluÒa	30	Tarragona			Provincia	Province
+33457	213	ESP	Spain	8	Comunidad de Madrid	31	Madrid			Provincia	Province
+33458	213	ESP	Spain	9	Comunidad Foral de Navarra	32	Navarra			Provincia	Province
+33459	213	ESP	Spain	10	Comunidad Valenciana	33	Alicante		Alacant	Provincia	Province
+33460	213	ESP	Spain	10	Comunidad Valenciana	34	CastellÛn		CastellÛ	Provincia	Province
+33461	213	ESP	Spain	10	Comunidad Valenciana	35	Valencia		ValËncia	Provincia	Province
+33462	213	ESP	Spain	11	Extremadura	36	Badajoz			Provincia	Province
+33463	213	ESP	Spain	11	Extremadura	37	C·ceres			Provincia	Province
+33464	213	ESP	Spain	12	Galicia	38	La CoruÒa		La CoruÒa	Provincia	Province
+33465	213	ESP	Spain	12	Galicia	39	Lugo			Provincia	Province
+33466	213	ESP	Spain	12	Galicia	40	Ourense			Provincia	Province
+33467	213	ESP	Spain	12	Galicia	41	Pontevedra			Provincia	Province
+33470	213	ESP	Spain	15	La Rioja	42	La Rioja			Provincia	Province
+33471	213	ESP	Spain	16	PaÌs Vasco	43	¡lava		Araba	Provincia	Province
+33472	213	ESP	Spain	16	PaÌs Vasco	44	Guip˙zcoa			Provincia	Province
+33473	213	ESP	Spain	16	PaÌs Vasco	45	Vizcaya			Provincia	Province
+33474	213	ESP	Spain	17	Principado de Asturias	46	Asturias			Provincia	Province
+33475	213	ESP	Spain	18	RegiÛn de Murcia	47	Murcia			Provincia	Province
