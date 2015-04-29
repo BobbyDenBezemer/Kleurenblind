@@ -100,7 +100,7 @@ def get_uncoloured_list(county):
 
 # Start of colouring first shell around maximum edges-county. Only to be used
 # for the first shell. 
-def color_max_edging():
+def color_max_edges():
     maximum = find_max(edges_table)
     coloured[int(maximum)] = True
     return maximum
@@ -202,7 +202,7 @@ if __name__ == '__main__':
     initialize_colouring()
 
     # color the county with max edges
-    maximum = color_max_edging()
+    maximum = color_max_edges()
 
     # get the shell of the first county
     next_to = edges_table.get(maximum)
@@ -216,13 +216,13 @@ if __name__ == '__main__':
     colors[start_shell] += 1
     uncoloured_list = get_uncoloured_list(start_shell)
 
-    # Get adjacent countries, color accordingly
+    # Get adjacent counties, color accordingly
     adjacent_countys = [item for item in edges_table.get(start_shell) if item in next_to]
     
     for item in adjacent_countys:
         color_county(item)
     
-    # find the other adjacent countries
+    # find the other adjacent counties
     for item in adjacent_countys:
         to_color = [x for x in edges_table.get(item) if x in next_to]       
         for x in to_color:
@@ -236,7 +236,7 @@ if __name__ == '__main__':
     for item in next_to:
         edges.append(edges_table.get(item))
     
-    # Color shell for shell, in this case 5 times. Repeat until all countys are coloured = True
+    # Color shell for shell. Repeat until all counties are coloured = True
     third_shell = [] 
     while True:
         for i in range(len(edges)):
@@ -248,13 +248,7 @@ if __name__ == '__main__':
                color_county(item)
                edges.append(edges_table.get(item))
         if all(coloured):
-            break
-
-    highest_color_county = find_county_highest_color(colors)     
+            break  
     
-
-    #dictionary_colors = {}
-    #for i in range(1, len(edges_table) + 1):
-    #dictionary_colors[lookup_table[i]] = colors[i]
     print collission_test()
     print colors
