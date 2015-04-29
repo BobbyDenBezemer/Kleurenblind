@@ -25,15 +25,45 @@ def penssylvania_dict_reader(filename, seperator):
         edges_table[key] = storage
         storage = []
     return edges_table, lookup_table
+    
+def twitter():
+
+    data = dict()
+    
+    filename = "netwerk1.csv"
+    seperator = ","
+    with open(filename, 'r') as csvfile:
+        reader = csv.reader(csvfile, delimiter= seperator)
+        next(csvfile)
+        for row in reader:
+            if int(row[0]) in data:
+                data[int(row[0])].append(row[1])
+            else:
+                data[int(row[0])] = [row[1]]
+            if int(row[1]) in data:
+                data[int(row[1])].append(row[0])
+            else:
+                data[int(row[1])] = [row[0]]
+    
+    storage = []
+    for key, item in data.iteritems():
+        for e in item:
+            storage.append(int(e))
+        data[key] = storage
+        storage = []
+    
+    print data
+
+    return data
 
 # List of all colors, index of list corresponds with countie number.
 # Start with each countie in the edges_list as coloured = False
 def initialize_colouring():
     coloured.append('start coloured list')
     colors.append('start colors list')
-    for i in range(1, len(edges_table) + 1):
+    for i in range(1, 100):
         colors.append(1)
-    for i in range(1, len(edges_table) + 1):
+    for i in range(1, 100):
         coloured.append(False)
 
 # Find countie with most adjacent countries which are not currently coloured.
@@ -44,7 +74,7 @@ def find_max(edges_list):
     for key in edges_list:
         x = 0
         for item in edges_table.get(key):
-            if coloured[item] == False:
+            if coloured[int(item)] == False:
                 x += 1
         if x > maximum:
             maximum = x
@@ -65,7 +95,7 @@ def get_uncoloured_list(countie):
 # for the first shell. 
 def color_max_edging():
     maximum = find_max(edges_table)
-    coloured[maximum] = True
+    coloured[int(maximum)] = True
     return maximum
             
 # check for collissions, error checking the coloring process. Returns true
@@ -167,12 +197,14 @@ def optimilization_try():
             if colors[countie_1] != 0 and colors[countie_2] != 0:
                 if collission_test() == True:
                    break
-    
 
 
 if __name__ == '__main__':
 
     edges_table, lookup_table = penssylvania_dict_reader("Thomasland.csv", ",")
+    edges_table = twitter()
+    print edges_table
+    
     
     colors = []
     coloured = []
@@ -187,7 +219,7 @@ if __name__ == '__main__':
 
     # color the shell with a different color
     for item in next_to:
-        colors[item] = colors[maximum] + 1
+        colors[item] = colors[maximum + 1] + 1
 
     # find the countie in shell with most edges, color that one + 1
     start_shell = find_most_edges(next_to)
@@ -230,11 +262,9 @@ if __name__ == '__main__':
 
     highest_color_countie = find_countie_highest_color(colors)     
     
-    if colors[highest_color_countie] > 4:
-        optimilization_try()
-    else: 
-        dictionary_colors = {}
-        for i in range(1, len(edges_table) + 1):
-            dictionary_colors[lookup_table[i]] = colors[i]
-        print collission_test()
-        print colors
+
+    #dictionary_colors = {}
+    #for i in range(1, len(edges_table) + 1):
+    #dictionary_colors[lookup_table[i]] = colors[i]
+    print collission_test()
+    print colors
