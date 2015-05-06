@@ -30,7 +30,7 @@ def import_data():
 
     data = dict()
     
-    filename = "netwerk3.csv"
+    filename = "netwerk1.csv"
     seperator = ","
     with open(filename, 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter= seperator)
@@ -59,13 +59,13 @@ def import_data():
 def initialize_colouring():
     coloured.append('start coloured list')
     colors.append('start colors list')
-    for i in range(1, len(edges_table)):
+    for i in range(1, len(edges_table) + 1):
         colors.append(1)
-    for i in range(1, len(edges_table)):
+    for i in range(1, len(edges_table) + 1):
         coloured.append(False)
     
     #if netwerk1:
-    #coloured[76] = True
+    coloured[76] = True
     
     #if netwerk2:
     #coloured[81] = True

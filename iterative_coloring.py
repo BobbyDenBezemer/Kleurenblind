@@ -68,7 +68,7 @@ def initialize_colouring(coloured, colors):
         coloured.append(False)
     
     #if netwerk1:
-    #coloured[76] = True
+    coloured[76] = True
     
     #if netwerk2:
     #coloured[81] = True
@@ -100,31 +100,36 @@ def random_node_selector(edges_table):
     return selected_node
 
 # Colors a single node
-def color_node(node, coloured, colors):
-    edges = edges_table.get(node)
-    while collission_edges(edges, node, colors):
-        for item in edges:
-            if colors[item] == colors[node]:
-                colors[node] += 1
+def random_color_node(node, coloured, colors):
+    colors[node] = random.randint(1, 4)
     coloured[node] = True
 
 # Checks for color collissions around single node
-def collission_edges(edges, node, colors):
-    if edges == None:
-        return False
-    else: 
-        for item in edges:
-            if colors[item] == colors[node]:
-                return True
-    return False
+def most_collissions_node(edges_table, colors):
+    collission_count = 0    
+    for node in edges_table:
+        edges = edges_table.get(node)
+        count = 0
+        for item in edges: 
+            if colors[node] == colors[item]:
+                count += 1
+        if count > collission_count:
+            collission_count = count
+            most_collission_node = node
+    
+    return most_collission_node
+
 
 # Color all nodes
 def color_all(edges_table, coloured, colors):
     while True:
         node = random_node_selector(edges_table)
-        color_node(node, coloured, colors)
-        if all(coloured) and collission_test(colors) == True:
+        random_color_node(node, coloured, colors)
+        if all(coloured):
             break
+
+def change_color(node, colors):
+    colors[node] += 1
 
 def showPlot(max_colors, trials):
     """
@@ -136,13 +141,14 @@ def showPlot(max_colors, trials):
     # robot_type. 
     for i in range(0, trials):
         x_axis.append(i)
-    
-    print len(x_axis), len(max_colors)
+        
+    num_bins  = 100
+    plt.hist(max_colors, num_bins)
   
-    plt.plot(x_axis, max_colors)
-    plt.ylabel('Number of colors')
-    plt.xlabel('Trial')
-    plt.axis([0, trials, 3, 9])
+    #plt.plot(x_axis, max_colors)
+    plt.ylabel('number of different colors')
+    plt.xlabel('trials')
+    plt.axis([0, 100, 0, 300])
     plt.grid(True)
     plt.title('Random colouring of nodes: how many different colors needed')
     plt.show()
@@ -158,11 +164,21 @@ def main(trials):
         
         color_all(edges_table, coloured, colors)
         
+        #while collission_test(colors) != True:
+            #node = most_collissions_node(edges_table, colors)
+            #change_color(node, colors)
+        
         maximum_color = 0
         for item in range(1, len(colors) - 1):
             if colors[item] > maximum_color:
                 maximum_color = colors[item]
-        max_colors.append(maximum_color)
+                
+        # for different colors needed
+        #max_colors.append(maximum_color)    
+                
+        # for histogram
+        print most_collissions_node(edges_table, colors)
+        max_colors.append(most_collissions_node(edges_table, colors))
 
     return max_colors
 
