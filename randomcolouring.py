@@ -33,7 +33,7 @@ def import_data():
 
     data = dict()
     
-    filename = "netwerk1.csv"
+    filename = "netwerk3.csv"
     seperator = ","
     with open(filename, 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter= seperator)
@@ -131,15 +131,11 @@ def showPlot(max_colors, trials):
     """
     x_axis = []
 
-    # Calculating the mean time to clean coverage of room for each number
-    # of robots for num_trials, up until max_num_robots for specified.
-    # robot_type. 
     for i in range(0, trials):
         x_axis.append(i)
     
-    print len(x_axis), len(max_colors)
   
-    plt.plot(x_axis, max_colors)
+    plt.plot(x_axis, max_colors, 'ro')
     plt.ylabel('Number of colors')
     plt.xlabel('Trial')
     plt.axis([0, trials, 3, 9])
@@ -168,11 +164,11 @@ def main(trials):
 
 if __name__ == '__main__':
 
-    #edges_table, lookup_table = dict_reader("Spanje_provincies_list.csv", ",")     
+    #edges_table, lookup_table = dict_reader("pennsylvania_counties_list.csv", ",")     
     
     edges_table = import_data()
     
-    trials = 1000
+    trials = 100
     
     max_colors = main(trials)
     

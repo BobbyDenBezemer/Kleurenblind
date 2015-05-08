@@ -33,7 +33,7 @@ def import_data():
 
     data = dict()
     
-    filename = "netwerk1.csv"
+    filename = "netwerk3.csv"
     seperator = ","
     with open(filename, 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter= seperator)
@@ -68,7 +68,7 @@ def initialize_colouring(coloured, colors):
         coloured.append(False)
     
     #if netwerk1:
-    coloured[76] = True
+    #coloured[76] = True
     
     #if netwerk2:
     #coloured[81] = True
@@ -142,15 +142,16 @@ def showPlot(max_colors, trials):
     for i in range(0, trials):
         x_axis.append(i)
         
-    num_bins  = 100
-    plt.hist(max_colors, num_bins)
+    #num_bins  = 100
+    #plt.hist(max_colors, num_bins)
   
-    #plt.plot(x_axis, max_colors)
+    plt.plot(x_axis, max_colors, 'ro')
     plt.ylabel('number of different colors')
     plt.xlabel('trials')
-    plt.axis([0, 100, 0, 300])
+    plt.axis([0, trials, 0, 12])
     plt.grid(True)
-    plt.title('Random colouring of nodes: how many different colors needed')
+    plt.title('Iterative colouring of nodes: how many different colors needed')
+    plt.title('Iterative colouring of nodes. Start: color 1 to 4')
     plt.show()
 
 def main(trials):
@@ -164,9 +165,9 @@ def main(trials):
         
         color_all(edges_table, coloured, colors)
         
-        #while collission_test(colors) != True:
-            #node = most_collissions_node(edges_table, colors)
-            #change_color(node, colors)
+        while collission_test(colors) != True:
+            node = most_collissions_node(edges_table, colors)
+            change_color(node, colors)
         
         maximum_color = 0
         for item in range(1, len(colors) - 1):
@@ -174,21 +175,20 @@ def main(trials):
                 maximum_color = colors[item]
                 
         # for different colors needed
-        #max_colors.append(maximum_color)    
+        max_colors.append(maximum_color)    
                 
         # for histogram
-        print most_collissions_node(edges_table, colors)
-        max_colors.append(most_collissions_node(edges_table, colors))
+        #max_colors.append(most_collissions_node(edges_table, colors))
 
     return max_colors
 
 if __name__ == '__main__':
 
-    #edges_table, lookup_table = dict_reader("Spanje_provincies_list.csv", ",")     
+    #edges_table, lookup_table = dict_reader("Pennsylvania_counties_list.csv", ",")     
     
     edges_table = import_data()
     
-    trials = 1000
+    trials = 100
     
     max_colors = main(trials)
     
