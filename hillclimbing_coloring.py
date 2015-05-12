@@ -68,7 +68,7 @@ def initialize_colouring(coloured, colors):
         coloured.append(False)
     
     #if netwerk1:
-    #coloured[76] = True
+    coloured[76] = True
     
     #if netwerk2:
     #coloured[81] = True
@@ -148,18 +148,27 @@ def showPlot(max_colors, trials):
     plt.plot(x_axis, max_colors, 'ro')
     plt.ylabel('number of different colors')
     plt.xlabel('trials')
-    plt.axis([0, trials, 0, 15])
+    plt.axis([0, trials - 1, 0, 7])
     plt.grid(True)
     plt.title('Iterative colouring of nodes: how many different colors needed')
     plt.title('Iterative colouring of nodes. Start: color 1 to 4')
     plt.show()
+    
+def count_collissions(edges_table, colors):
+    count = 0
+    for item in edges_table:
+        edges = edges_table.get(item)
+        for node in edges:
+            if colors[item] == colors[node]:
+                count += 1
+    return count
 
 def main(trials):
     max_colors = []
     runtime = []  
     
     for i in range(trials):
-        
+        print 'Finding solution #' + str(i + 1) + '...'
         start = time.clock()
         colors = []
         coloured = []
@@ -168,42 +177,67 @@ def main(trials):
         
         color_all(edges_table, coloured, colors)
         
+        swaps = 0
+        time_out = 0
+        
         while collission_test(colors) != True:
-            #TODO: More optimilization here; hillclimbing? simulated annealing?
+            #Hillclimbing for XX swaps
+            if swaps > 20000:
+                break
+            before = count_collissions(edges_table, colors)
+            node_swap1 = random_node_selector(edges_table)
+            node_swap2 = random_node_selector(edges_table)
+            if colors[node_swap1] != colors[node_swap2]:
+                swaps += 1
+                temp = colors[node_swap2]
+                colors[node_swap2] = colors[node_swap1]
+                colors[node_swap1] = temp
+                after = count_collissions(edges_table, colors)
+                if after > before:
+                    time_out += 1
+                    temp = colors[node_swap2]
+                    colors[node_swap2] = colors[node_swap1]
+                    colors[node_swap1] = temp
+                else: 
+                    time_out = 0
+        
+        while collission_test(colors) != True:
             node = most_collissions_node(edges_table, colors)
             change_color(node, colors)
-
+        
         end = time.clock()
-        runtime.append(end - start)        
+        
         
         maximum_color = 0
         for item in range(1, len(colors) - 1):
             if colors[item] > maximum_color:
                 maximum_color = colors[item]
                 
-                
+        if maximum_color == 3:
+            print colors
+        
         # for different colors needed
         max_colors.append(maximum_color)    
-        
-        if maximum_color == 4:
-            print colors
-        #print maximum_color
+
         # for histogram
         #max_colors.append(most_collissions_node(edges_table, colors))
+
+        # algorithm timing
+        runtime.append(end - start)
 
     return max_colors, runtime
 
 if __name__ == '__main__':
 
-    edges_table, lookup_table = dict_reader("Pennsylvania_counties_list.csv", ",")     
+    #edges_table, lookup_table = dict_reader("Pennsylvania_counties_list.csv", ",")     
     
-    #edges_table = import_data()
+    edges_table = import_data()
     
-    trials = 1000
+    trials = 5
     
     max_colors, runtime = main(trials)
     
-    print runtime
+    print 'Runtimes: ' + str(runtime)
     
     showPlot(max_colors, trials)
     

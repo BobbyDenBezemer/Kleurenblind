@@ -1,7 +1,7 @@
 import csv
 import random
-import numpy as np
 import matplotlib.pyplot as plt
+import time
     
 def dict_reader(filename, seperator):
     """
@@ -33,7 +33,7 @@ def import_data():
 
     data = dict()
     
-    filename = "netwerk3.csv"
+    filename = "netwerk1.csv"
     seperator = ","
     with open(filename, 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter= seperator)
@@ -68,7 +68,7 @@ def initialize_colouring(coloured, colors):
         coloured.append(False)
     
     #if netwerk1:
-    #coloured[76] = True
+    coloured[76] = True
     
     #if netwerk2:
     #coloured[81] = True
@@ -138,29 +138,37 @@ def showPlot(max_colors, trials):
     plt.plot(x_axis, max_colors, 'ro')
     plt.ylabel('Number of colors')
     plt.xlabel('Trial')
-    plt.axis([0, trials, 3, 9])
+    plt.axis([0, trials, 0,10])
     plt.grid(True)
     plt.title('Random colouring of nodes: how many different colors needed')
     plt.show()
 
 def main(trials):
     max_colors = []
+    runtime = [] 
     
     for i in range(trials):
         colors = []
         coloured = []
+        start = time.clock()
         
         initialize_colouring(coloured, colors)
         
         color_all(edges_table, coloured, colors)
+        
+        end = time.clock()
+        runtime.append(end - start)
         
         maximum_color = 0
         for item in range(1, len(colors) - 1):
             if colors[item] > maximum_color:
                 maximum_color = colors[item]
         max_colors.append(maximum_color)
+        
+        if maximum_color == 4: 
+            print colors
 
-    return max_colors
+    return max_colors, runtime
 
 if __name__ == '__main__':
 
@@ -168,9 +176,9 @@ if __name__ == '__main__':
     
     edges_table = import_data()
     
-    trials = 100
+    trials = 10
     
-    max_colors = main(trials)
+    max_colors, runtime = main(trials)
     
     showPlot(max_colors, trials)
     
