@@ -2,6 +2,7 @@ import csv
 import random
 import matplotlib.pyplot as plt
 import time
+
     
 def dict_reader(filename, seperator):
     """
@@ -81,16 +82,11 @@ def initialize_colouring(coloured, colors):
 # if there are no colissions, otherwise returns the first occurring collission
 # and false. 
 def collission_test(colors):
-    x = 0
-    y = 0
     for key in edges_table:
         adjacent = edges_table.get(key)
         for county in adjacent:
             if colors[key] == colors[county]:
-                x = key
-                y = county
-                #print lookup_table[key] + ' collides with ' + lookup_table[county]
-                return False, x, y
+                return False
     return True
     
 # Get a random node from the edges_table list. Returns this node. 
@@ -100,8 +96,9 @@ def random_node_selector(edges_table):
     return selected_node
 
 # Colors a single node
-def color_node(node, coloured, colors):
+def color_node(node, coloured, colors, edges_table):
     edges = edges_table.get(node)
+    colors[node] = random.randint(1, len(edges_table))
     while collission_edges(edges, node, colors):
         for item in edges:
             if colors[item] == colors[node]:
@@ -122,7 +119,7 @@ def collission_edges(edges, node, colors):
 def color_all(edges_table, coloured, colors):
     while True:
         node = random_node_selector(edges_table)
-        color_node(node, coloured, colors)
+        color_node(node, coloured, colors, edges_table)
         if all(coloured) and collission_test(colors) == True:
             break
 
@@ -138,7 +135,7 @@ def showPlot(max_colors, trials):
     plt.plot(x_axis, max_colors, 'ro')
     plt.ylabel('Number of colors')
     plt.xlabel('Trial')
-    plt.axis([0, trials, 0,10])
+    plt.axis([0, trials, 0,100])
     plt.grid(True)
     plt.title('Random colouring of nodes: how many different colors needed')
     plt.show()
@@ -146,6 +143,7 @@ def showPlot(max_colors, trials):
 def main(trials):
     max_colors = []
     runtime = [] 
+    performance = []
     
     for i in range(trials):
         colors = []
@@ -165,10 +163,10 @@ def main(trials):
                 maximum_color = colors[item]
         max_colors.append(maximum_color)
         
-        if maximum_color == 4: 
-            print colors
+        unique_colors = set(colors)
+        performance.append(len(unique_colors))
 
-    return max_colors, runtime
+    return max_colors, runtime, performance
 
 if __name__ == '__main__':
 
@@ -176,9 +174,9 @@ if __name__ == '__main__':
     
     edges_table = import_data()
     
-    trials = 10
+    trials = 1000
     
-    max_colors, runtime = main(trials)
+    max_colors, runtime, performance = main(trials)
     
-    showPlot(max_colors, trials)
+    showPlot(performance, trials)
     

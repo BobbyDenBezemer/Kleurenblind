@@ -148,7 +148,7 @@ def showPlot(max_colors, trials):
     plt.plot(x_axis, max_colors, 'ro')
     plt.ylabel('number of different colors')
     plt.xlabel('trials')
-    plt.axis([0, trials - 1, 0, 7])
+    plt.axis([0, trials - 1, 0, 100])
     plt.grid(True)
     plt.title('Iterative colouring of nodes: how many different colors needed')
     plt.title('Iterative colouring of nodes. Start: color 1 to 4')

@@ -81,16 +81,11 @@ def initialize_colouring(coloured, colors):
 # if there are no colissions, otherwise returns the first occurring collission
 # and false. 
 def collission_test(colors):
-    x = 0
-    y = 0
     for key in edges_table:
         adjacent = edges_table.get(key)
         for county in adjacent:
             if colors[key] == colors[county]:
-                x = key
-                y = county
-                #print lookup_table[key] + ' collides with ' + lookup_table[county]
-                return False, x, y
+                return False
     return True
     
 # Get a random node from the edges_table list. Returns this node. 
@@ -148,7 +143,7 @@ def showPlot(max_colors, trials):
     plt.plot(x_axis, max_colors, 'ro')
     plt.ylabel('number of different colors')
     plt.xlabel('trials')
-    plt.axis([0, trials, 0, 15])
+    plt.axis([0, trials, 0, 100])
     plt.grid(True)
     plt.title('Iterative colouring of nodes: how many different colors needed')
     plt.title('Iterative colouring of nodes. Start: color 1 to 4')
@@ -199,7 +194,7 @@ if __name__ == '__main__':
     
     #edges_table = import_data()
     
-    trials = 1000
+    trials = 10
     
     max_colors, runtime = main(trials)
     
