@@ -2,6 +2,7 @@ import random
 import matplotlib.pyplot as plt
 import time
 import data_loading
+import heapq
 
 def initialize_colouring(coloured, colors):
     """
@@ -17,7 +18,7 @@ def initialize_colouring(coloured, colors):
         coloured.append(False)
     
     #if netwerk1:
-    coloured[76] = True
+    #coloured[76] = True
     
     #if netwerk2:
     #coloured[81] = True
@@ -83,6 +84,37 @@ def color_all(edges_table, coloured, colors):
         if all(coloured) and collission_test(colors) == True:
             break
 
+def iterative_optimization(edges_table, coloured, colors, available_colors):
+    """
+    Takes edges_table, coloured list, and colors list which already has a 
+    solution through random colouring. 
+    Function picks two random nodes, and checks if the colors are non-identical. 
+    If they are, the first node's color becomes the same color as the second 
+    node, if this is possible without collissions. Keeps repeating this process
+    until constraint 'available_colors' is reached. 
+    """
+    iterations = 0
+    unique_colors = set(colors)
+    while len(unique_colors) > available_colors:
+        iterations += 1
+        
+        node1 = random_node_selector(edges_table)
+        node2 = random_node_selector(edges_table)
+        node_color = colors[node1]
+        
+        highest_colors = heapq.nlargest(10, set(colors))
+        
+        if colors[node1] == highest_colors[1]:
+            print 'x'
+            
+        
+        if colors[node1] != colors[node2]:
+            colors[node1] = colors[node2]
+            if collission_test(colors) == False:
+                colors[node1] = node_color
+        unique_colors = set(colors)
+
+
 def showPlot(max_colors, trials):
     """
     Plots the max_colors vs. trials as red dots. 
@@ -96,20 +128,20 @@ def showPlot(max_colors, trials):
     plt.plot(x_axis, max_colors, 'ro')
     plt.ylabel('Number of colors')
     plt.xlabel('Trial')
-    plt.axis([0, trials, 0,100])
+    plt.axis([0, trials, 0,10])
     plt.grid(True)
     plt.title('Random colouring of nodes: how many different colors needed')
     plt.show()
 
-def main(trials):
+def main(trials, available_colors):
     """
-    Runs the coloring algorithm XXX trials times, and returns the highest
-    absolute color, the runtime for each trial, and the amount of unique colors
-    that have been used. 
+    Runs the coloring algorithm XXX trials times, iterating until the coloring
+    is achieved with the number of unique colors is equal to available colors. 
+    Returns the amount of unique colors for each trial, and the runtime for
+    each trial. 
     """
-    max_colors = []
-    runtime = [] 
     performance = []
+    runtime = [] 
     
     for i in range(trials):
         colors = []
@@ -120,28 +152,25 @@ def main(trials):
         
         color_all(edges_table, coloured, colors)
         
+        iterative_optimization(edges_table, coloured, colors, available_colors)
+        
         end = time.clock()
         runtime.append(end - start)
-        
-        maximum_color = 0
-        for item in range(1, len(colors) - 1):
-            if colors[item] > maximum_color:
-                maximum_color = colors[item]
-        max_colors.append(maximum_color)
         
         unique_colors = set(colors)
         performance.append(len(unique_colors))
 
-    return max_colors, runtime, performance
+    return runtime, performance
 
 if __name__ == '__main__':
 
     edges_table, lookup_table = data_loading.edges_table_reader("Pennsylvania_counties_list.csv", ",")
     #edges_table = data_loading.social_graph_reader("netwerk1.csv", ",")
     
-    trials = 1000
+    trials = 1
+    available_colors = 12
     
-    max_colors, runtime, performance = main(trials)
+    runtime, performance = main(trials, available_colors)
     
     showPlot(performance, trials)
     
