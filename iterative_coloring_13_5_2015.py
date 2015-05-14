@@ -94,25 +94,32 @@ def iterative_optimization(edges_table, coloured, colors, available_colors):
     until constraint 'available_colors' is reached. 
     """
     iterations = 0
-    unique_colors = set(colors)
+    changes = 0
+    unique_colors = set(colors[1:])
     while len(unique_colors) > available_colors:
+        if iterations > 50000:
+            break
         iterations += 1
+        print iterations, len(unique_colors), changes
         
-        node1 = random_node_selector(edges_table)
-        node2 = random_node_selector(edges_table)
-        node_color = colors[node1]
+        node = random_node_selector(edges_table)
+        node_color = colors[node]
         
-        highest_colors = heapq.nlargest(10, set(colors))
+        highest_colors = heapq.nlargest(10, set(colors[1:]))
         
-        if colors[node1] == highest_colors[1]:
-            print 'x'
+        for i in range(2, len(unique_colors)):
+            if colors[node] == highest_colors[1]:
+                index = random.randint(2, len(highest_colors) - 1)
+                colors[node] = highest_colors[index]
+                if collission_test(colors) == True:
+                    changes += 1
+                    break
+                else:
+                    colors[node] = node_color
             
-        
-        if colors[node1] != colors[node2]:
-            colors[node1] = colors[node2]
-            if collission_test(colors) == False:
-                colors[node1] = node_color
-        unique_colors = set(colors)
+        unique_colors = set(colors[1:])
+    
+    print colors
 
 
 def showPlot(max_colors, trials):
@@ -157,7 +164,7 @@ def main(trials, available_colors):
         end = time.clock()
         runtime.append(end - start)
         
-        unique_colors = set(colors)
+        unique_colors = set(colors[1:])
         performance.append(len(unique_colors))
 
     return runtime, performance
@@ -167,8 +174,8 @@ if __name__ == '__main__':
     edges_table, lookup_table = data_loading.edges_table_reader("Pennsylvania_counties_list.csv", ",")
     #edges_table = data_loading.social_graph_reader("netwerk1.csv", ",")
     
-    trials = 1
-    available_colors = 12
+    trials = 1000
+    available_colors = 4
     
     runtime, performance = main(trials, available_colors)
     
