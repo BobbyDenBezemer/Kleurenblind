@@ -97,10 +97,9 @@ def iterative_optimization(edges_table, coloured, colors, available_colors):
     changes = 0
     unique_colors = set(colors[1:])
     while len(unique_colors) > available_colors:
-        if iterations > 50000:
+        if iterations > 25000:
             break
         iterations += 1
-        print iterations, len(unique_colors), changes
         
         node = random_node_selector(edges_table)
         node_color = colors[node]
@@ -118,8 +117,6 @@ def iterative_optimization(edges_table, coloured, colors, available_colors):
                     colors[node] = node_color
             
         unique_colors = set(colors[1:])
-    
-    print colors
 
 
 def showPlot(max_colors, trials):
@@ -135,7 +132,7 @@ def showPlot(max_colors, trials):
     plt.plot(x_axis, max_colors, 'ro')
     plt.ylabel('Number of colors')
     plt.xlabel('Trial')
-    plt.axis([0, trials, 0,10])
+    plt.axis([0, trials, 0,max(performance) + 1])
     plt.grid(True)
     plt.title('Random colouring of nodes: how many different colors needed')
     plt.show()
@@ -150,10 +147,13 @@ def main(trials, available_colors):
     performance = []
     runtime = [] 
     
+    
     for i in range(trials):
+        print 'Finding solution #' + str(i + 1) + '...'
         colors = []
         coloured = []
         start = time.clock()
+        
         
         initialize_colouring(coloured, colors)
         

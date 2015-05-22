@@ -17,7 +17,7 @@ def initialize_colouring(coloured, colors):
         coloured.append(False)
     
     #if netwerk1:
-    coloured[76] = True
+    #coloured[76] = True
     
     #if netwerk2:
     #coloured[81] = True
@@ -98,7 +98,7 @@ def showPlot(max_colors, trials):
     plt.xlabel('Trial')
     plt.axis([0, trials, 0,100])
     plt.grid(True)
-    plt.title('Random colouring of nodes: how many different colors needed')
+    plt.title('Random colouring of nodes (Netwerk #1)')
     plt.show()
 
 def main(trials):
@@ -136,8 +136,8 @@ def main(trials):
 
 if __name__ == '__main__':
 
-    edges_table, lookup_table = data_loading.edges_table_reader("Pennsylvania_counties_list.csv", ",")
-    #edges_table = data_loading.social_graph_reader("netwerk1.csv", ",")
+    #edges_table, lookup_table = data_loading.edges_table_reader("Pennsylvania_counties_list.csv", ",")
+    edges_table = data_loading.social_graph_reader("netwerk1.csv", ",")
     
     trials = 1000
     

@@ -17,7 +17,7 @@ def initialize_colouring(coloured, colors):
         coloured.append(False)
     
     #if netwerk1:
-    #coloured[76] = True
+    coloured[76] = True
     
     #if netwerk2:
     #coloured[81] = True
@@ -47,7 +47,7 @@ def random_node_selector(edges_table):
 
 # Colors a single node
 def random_color_node(node, coloured, colors):
-    colors[node] = random.randint(1, 4)
+    colors[node] = random.randint(1, 3)
     coloured[node] = True
 
 # Checks for color collissions around single node
@@ -93,11 +93,10 @@ def showPlot(max_colors, trials):
   
     plt.plot(x_axis, max_colors, 'ro')
     plt.ylabel('number of different colors')
-    plt.xlabel('trials')
+    plt.xlabel('trial')
     plt.axis([0, trials - 1, 0, 10])
     plt.grid(True)
-    plt.title('Iterative colouring of nodes: how many different colors needed')
-    plt.title('Iterative colouring of nodes. Start: color 1 to 4')
+    plt.title('Hybrid colouring of nodes (Netwerk #1)')
     plt.show()
     
 def count_collissions(edges_table, colors):
@@ -112,6 +111,7 @@ def count_collissions(edges_table, colors):
 def main(trials):
     max_colors = []
     runtime = []  
+    array_colors = []
     
     for i in range(trials):
         print 'Finding solution #' + str(i + 1) + '...'
@@ -158,9 +158,8 @@ def main(trials):
         for item in range(1, len(colors) - 1):
             if colors[item] > maximum_color:
                 maximum_color = colors[item]
-                
-        if maximum_color == 3:
-            print colors
+
+        
         
         # for different colors needed
         max_colors.append(maximum_color)    
@@ -170,17 +169,21 @@ def main(trials):
 
         # algorithm timing
         runtime.append(end - start)
+        array_colors.append(colors)
+        
+        if maximum_color == 3:
+            break
 
-    return max_colors, runtime
+    return max_colors, runtime, array_colors
 
 if __name__ == '__main__':
 
-    edges_table, lookup_table = data_loading.edges_table_reader("Pennsylvania_counties_list.csv", ",")
-    #edges_table = data_loading.social_graph_reader("netwerk1.csv", ",")
+    #edges_table, lookup_table = data_loading.edges_table_reader("Spanje_provincies_list.csv", ",")
+    edges_table = data_loading.social_graph_reader("netwerk1.csv", ",")
     
-    trials = 10
+    trials = 5000
     
-    max_colors, runtime = main(trials)
+    max_colors, runtime, array_colors = main(trials)
     
     print 'Runtimes: ' + str(runtime)
     
